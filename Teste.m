@@ -16,12 +16,7 @@ function erroAmari = Teste(A, metodo, metrica, tipo, e, plot_flag)
 %          'sobi' - uma fonte uniforme e um sinal sonoro 'train'
 
 % Gera as fontes com média zero e variância unitária
-if strcmp(tipo, 'sobi')
-    s1 = 2*sqrt(3)*rand(1, 1000) - sqrt(3);
-    load train
-    s2 = y(1:12:12000)';
-    s = [s1;s2];
-elseif size(A, 1) == 2
+if size(A, 1) == 2
     if strcmp(tipo, 'uu')
         s1 = 2*sqrt(3)*rand(1, 1000) - sqrt(3);
         s2 = 2*sqrt(3)*rand(1, 1000) - sqrt(3);
@@ -36,6 +31,10 @@ elseif size(A, 1) == 2
         u1 = rand(1, 1000)-0.5;
         s1 = mu - b*sign(u1).*log(1-2*abs(u1));
         s2 = 2*sqrt(3)*rand(1, 1000) - sqrt(3);
+    elseif strcmp(tipo, 'sobi')
+        s1 = 2*sqrt(3)*rand(1, 1000) - sqrt(3);
+        load train
+        s2 = y(1:12:12000)';
     end
     s = [s1;s2];
 else
